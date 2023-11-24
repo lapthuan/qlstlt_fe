@@ -14,7 +14,7 @@ import {
   MapIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications, HangHoa } from "@/pages/dashboard";
+import { Home, Profile, Tables, Notifications, HangHoa, HangHoaChiTiet } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 
 
@@ -39,6 +39,7 @@ export const routes = [
         path: "/hang-hoa",
         element: <HangHoa />,
       },
+
       {
         icon: <TagIcon {...icon} />,
         name: "Danh mục",
@@ -101,6 +102,18 @@ export const routes = [
         path: "/tinh",
         element: <SignUp />,
       }
+    ],
+  },
+  {
+    layout: "dashboard",
+    pages: [
+
+      {
+        path: "/hang-hoa/:id",
+        element: <HangHoaChiTiet />,
+      },
+
+
     ],
   },
 

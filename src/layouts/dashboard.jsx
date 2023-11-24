@@ -10,6 +10,8 @@ import {
 import routes from "@/routes";
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
+import { HangHoaChiTiet } from "@/pages/dashboard";
+
 export function Dashboard() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { sidenavType } = controller;
@@ -42,7 +44,7 @@ export function Dashboard() {
                 <Route exact path={path} element={element} />
               ))
           )}
-         
+          
         </Routes>
         <div className="text-blue-gray-600">
           <Footer />

@@ -20,26 +20,38 @@ import { useMaterialTailwindController } from "@/context";
 import Modal from "antd/es/modal/Modal";
 import ModalHangHoa from "@/component/modal/modalHangHoa";
 import { useState } from "react";
+import { Button, message, Popconfirm } from "antd";
 
 
 
 export function HangHoa() {
-    const [controller, dispatch] = useMaterialTailwindController();
-    const { sidenavColor, sidenavType, openSidenav } = controller;
+
     const { data: hangHoa } = useAsync(() => ServiceHangHoa.getAllHangHoa())
 
-    const { id, setID } = useState()
 
+    const confirm = async (id) => {
+
+
+        const res = await ServiceHangHoa.deleteHangHoa(id)
+        if (res.message == "Xóa hàng hóa thành công") {
+            message.success("Xóa dữ liệu thành công")
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
+        }
+        else
+            message.error("Lỗi xóa dữ liệu, Dữ liệu này đang tồn tại ở bảng khác")
+    }
 
 
     return (
         <div className="mt-32 mb-8 flex flex-col gap-12">
-            <ModalHangHoa id={id} />
+            <Link to={"./add"}> <Button >Thêm dữ liệu</Button></Link>
+
             <Card>
-                <CardHeader variant="gradient" color={
-                    sidenavColor === "dark" ? "gray" : sidenavColor
+                <CardHeader variant="gradient" color={"gray"
                 } className="mb-8 p-6">
-                    <Typography variant="h6" color={sidenavColor === "white" ? "gray" : "white"}>
+                    <Typography variant="h6" color={"white"}>
                         Danh sách hàng hóa
                     </Typography>
                 </CardHeader>
@@ -71,7 +83,7 @@ export function HangHoa() {
                                         }`;
 
                                     return (
-                                        <tr key={MaHH}>
+                                        <tr key={key + 1}>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {MaHH}
@@ -104,22 +116,21 @@ export function HangHoa() {
                                             </td>
                                             <td className={className}>
                                                 <div className="flex ">
-
-                                                    <Chip
-                                                        variant="gradient"
-                                                        color={"green"}
-                                                        value={"Sửa"}
-                                                        className="py-0.5 px-2 mx-2 text-[11px] font-medium w-fit"
-                                                    />
+                                                    <Link to={`./${MaHH}`}>
+                                                        <Button type="info" >Xóa</Button>
+                                                    </Link>
 
 
-
-                                                    <Chip
-                                                        variant="gradient"
-                                                        color={"red"}
-                                                        value={"Xóa"}
-                                                        className="py-0.5 px-2 text-[11px] font-medium w-fit"
-                                                    />
+                                                    <Popconfirm
+                                                        title="Xóa dữ liệu"
+                                                        description="Bạn chắc xóa dữ liệu này?"
+                                                        onConfirm={() => confirm(MaHH)}
+                                                        okText="Đồng ý"
+                                                        cancelText="Hủy"
+                                                        okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
+                                                    >
+                                                        <Button danger>Xóa</Button>
+                                                    </Popconfirm>
                                                 </div>
 
                                             </td>
@@ -131,7 +142,7 @@ export function HangHoa() {
                     </table>
                 </CardBody>
             </Card>
-        </div>
+        </div >
     );
 }
 

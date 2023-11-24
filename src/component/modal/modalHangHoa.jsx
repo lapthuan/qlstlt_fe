@@ -19,7 +19,7 @@ const waitTime = (time = 100) => {
         }, time);
     });
 };
-const ModalHangHoa = ({ id }) => {
+const ModalHangHoa = ({ id, open }) => {
 
     const { data: danhMuc } = useAsync(() => ServiceDanhMuc.getAllDanhMuc())
     const { data: nhanHang } = useAsync(() => ServiceNhanHang.getAllNhanHang())
@@ -40,19 +40,15 @@ const ModalHangHoa = ({ id }) => {
     })
 
 
-
+    console.log('id', open)
     const [form] = Form.useForm();
     return (
         <>
 
             <ModalForm
                 title="Thêm dữ liệu"
-                trigger={
-                    <Button type="primary" >
 
-                        Thêm dữ liệu
-                    </Button >
-                }
+                open={open}
                 form={form}
 
                 modalProps={{
