@@ -117,31 +117,31 @@ export function HangHoa() {
                                             <td className={className}>
                                                 <div className="flex ">
                                                     <Link to={`./${MaHH}`}>
-                                                        <Button type="info" >Xóa</Button>
-                                                    </Link>
+                                                        <Button type="dashed">Sửa</Button>
+                                                </Link>
 
 
-                                                    <Popconfirm
-                                                        title="Xóa dữ liệu"
-                                                        description="Bạn chắc xóa dữ liệu này?"
-                                                        onConfirm={() => confirm(MaHH)}
-                                                        okText="Đồng ý"
-                                                        cancelText="Hủy"
-                                                        okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
-                                                    >
-                                                        <Button danger>Xóa</Button>
-                                                    </Popconfirm>
-                                                </div>
+                                                <Popconfirm
+                                                    title="Xóa dữ liệu"
+                                                    description="Bạn chắc xóa dữ liệu này?"
+                                                    onConfirm={() => confirm(MaHH)}
+                                                    okText="Đồng ý"
+                                                    cancelText="Hủy"
+                                                    okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
+                                                >
+                                                    <Button danger>Xóa</Button>
+                                                </Popconfirm>
+                                            </div>
 
-                                            </td>
+                                        </td>
                                         </tr>
-                                    );
+                        );
                                 }
                             )}
-                        </tbody>
-                    </table>
-                </CardBody>
-            </Card>
+                    </tbody>
+                </table>
+            </CardBody>
+        </Card>
         </div >
     );
 }
