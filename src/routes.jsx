@@ -16,6 +16,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { Home, Profile, Tables, Notifications, HangHoa, HangHoaChiTiet } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
+import DanhMuc from "./pages/dashboard/danhmuc/danhmuc";
+import NhanHang from "./pages/dashboard/nhanhang/nhanhang";
+import KhuyenMai from "./pages/dashboard/khuyenmai/khuyenmai";
 
 
 const icon = {
@@ -44,20 +47,20 @@ export const routes = [
         icon: <TagIcon {...icon} />,
         name: "Danh mục",
         path: "/danh-muc",
-        element: <Notifications />,
+        element: <DanhMuc />,
       },
 
       {
         icon: <ShoppingBagIcon {...icon} />,
         name: "Nhãn hàng",
         path: "/nhan-hang",
-        element: <Notifications />,
+        element: <NhanHang />,
       },
       {
         icon: <TicketIcon {...icon} />,
         name: "Khuyến mãi",
         path: "/khuyen-mai",
-        element: <Tables />,
+        element: <KhuyenMai />,
       },
 
     ],
