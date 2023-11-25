@@ -24,7 +24,7 @@ import NhanHangChiTiet from "./pages/dashboard/nhanhang/nhanhangchitiet";
 import KhuyenMaiChiTiet from "./pages/dashboard/khuyenmai/khuyenmaichitiet";
 import NhanVien from "./pages/dashboard/nhanvien/nhanvien";
 import KhachHang from "./pages/dashboard/khachhang/khachhang";
-import SieuThi from "./pages/dashboard/sieuthi";
+import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
 import Tinh from "./pages/dashboard/tinh";
 
 

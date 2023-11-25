@@ -14,7 +14,7 @@ export * from "@/pages/dashboard/nhanvien/nhanvien";
 export * from "@/pages/dashboard/nhanvien/nhanvienchitiet";
 export * from "@/pages/dashboard/khachhang/khachhang";
 export * from "@/pages/dashboard/khachhang/khachhang";
-export * from "@/pages/dashboard/sieuthi";
+export * from "@/pages/dashboard/sieuthi/sieuthi";
 export * from "@/pages/dashboard/tinh";
 
 
