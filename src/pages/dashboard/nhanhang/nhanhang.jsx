@@ -25,7 +25,7 @@ console.log(nhanhang);
 
     const confirm = async (id) => {
 
-        const res = await ServiceDanhMuc.deleteDanhMuc(id)
+        const res = await ServiceNhanHang.deleteNhanHang(id)
         if (res.message == "Xóa nhãn hàng thành công") {
             message.success("Xóa dữ liệu thành công")
             setTimeout(() => {

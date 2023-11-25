@@ -43,7 +43,7 @@ const NhanHangChiTiet = () => {
 
         } else {
             const body = {
-                "MaDanhMuc": values.MaDanhMuc,
+                "MaNhanHang": values.MaNhanHang,
                 "Ten": values.Ten,              
                 "GhiChu": values.GhiChu,
             }

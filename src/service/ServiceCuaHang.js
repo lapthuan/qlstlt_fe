@@ -2,7 +2,7 @@ import requests from "./httpService";
 
 const ServiceCuaHang = {
     getAllCuaHang: async () => {
-        return requests.get(`/cuahang`);
+        return requests.get(`/sieuthi`);
     },
 
 
