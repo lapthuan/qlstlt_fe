@@ -59,7 +59,7 @@ export function HangHoa() {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Mã Hàng hóa", "Tên hàng hóa", "Giá bán", "Ghi chú", "Nhãn hàng", "Danh mục", ""].map((el) => (
+                                {["Mã Hàng hóa", "Tên hàng hóa", "Giá bán", "Ghi chú", "Nhãn hàng", "Danh mục", "Hành động"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
