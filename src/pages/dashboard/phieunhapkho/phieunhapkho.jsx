@@ -101,7 +101,7 @@ const PhieuNhapKho = () => {
                                             </td>
                                                                
                                             <td className={className}>
-                                                <Link to={`../chi-tiet-don-hang/${MaPN}`}> <Button type="dashed" >Xem</Button>      </Link>
+                                                <Link to={`../chi-tiet-phieu-nhap/${MaPN}`}> <Button type="dashed" >Xem</Button>      </Link>
                                             </td>
                                             
                                             <td className={className}>

@@ -17,19 +17,19 @@ const ServiceDeliveryReceipt = {
         return requests.delete(`/phieunhap/${id}`);
     },
     getDeliveryReceiptDetail: async (id) => {
-        return requests.get(`/chitietphieunhap/${id}`);
+        return requests.get(`/ctphieunhap/${id}`);
     },
-    getDeliveryReceiptDetails: async (mapn, mamh) => {
-        return requests.get(`/chitietphieunhap/detail?mapn=${mapn}&magiay=${mamh}`);
+    getDeliveryReceiptDetails: async (maHH, maPN) => {
+        return requests.get(`/ctphieunhap/details?maHH=${maHH}&maPN=${maPN}`);
     },
     createDeliveryReceiptDetail: async (body) => {
-        return requests.post(`/chitietphieunhap`, body);
+        return requests.post(`/ctphieunhap`, body);
     },
     editDeliveryReceiptDetail: async (body) => {
-        return requests.put(`/chitietphieunhap/`, body);
+        return requests.put(`/ctphieunhap/`, body);
     },
     deleteDeliveryReceiptDetail: async (body) => {
-        return requests.post(`/chitietphieunhap/deletedetail`, body);
+        return requests.post(`/ctphieunhap/delete`, body);
     },
 }
 

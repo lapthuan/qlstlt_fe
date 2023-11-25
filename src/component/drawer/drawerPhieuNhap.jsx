@@ -8,7 +8,7 @@ import ServiceHangHoa from '@/service/ServiceHangHoa';
 import useAsync from '@/hook/useAsync';
 const { Option } = Select;
 
-const DrawerKhuyenMai = ({ form, open, setOpen, id, MaHH }) => {
+const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
 
     const { data: HangHoa } = useAsync(() => ServiceHangHoa.getAllHangHoa())
 
@@ -88,7 +88,7 @@ const DrawerKhuyenMai = ({ form, open, setOpen, id, MaHH }) => {
         <>
 
             <Drawer
-                title={MaHH != "" ? "Sửa chi tiết khuyến mãi" : "Thêm chi tiết khuyến mãi"}
+                title="Thêm chi tiết khuyến mãi"
                 width={720}
                 onClose={onClose}
                 open={open}
@@ -186,4 +186,4 @@ const DrawerKhuyenMai = ({ form, open, setOpen, id, MaHH }) => {
         </>
     );
 };
-export default DrawerKhuyenMai;
+export default DrawerPhieuNhap;

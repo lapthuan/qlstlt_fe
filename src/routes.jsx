@@ -39,6 +39,8 @@ import Tinh from "./pages/dashboard/tinh";
 import SieuThiChiTiet from "./pages/dashboard/sieuthi/sieuthichitiet";
 import ChiNhanh from "./pages/dashboard/chinhanh";
 import ChiTietKhuyenMai from "./pages/dashboard/khuyenmai/chitietkhuyenmai";
+import ChiTietHoaDon from "./pages/dashboard/hoadon/chitiethoadon";
+import ChiTietPhieuNhap from "./pages/dashboard/phieunhapkho/chitietphieunhap";
 
 
 const icon = {
@@ -171,6 +173,14 @@ export const routes = [
       {
         path: "/sieu-thi/:id",
         element: <SieuThiChiTiet />,
+      },
+      {
+        path: "/chi-tiet-don-hang/:id",
+        element: <ChiTietHoaDon />,
+      },
+      {
+        path: "/chi-tiet-phieu-nhap/:id",
+        element: <ChiTietPhieuNhap />,
       },
       {
         icon: <HomeIcon {...icon} />,
