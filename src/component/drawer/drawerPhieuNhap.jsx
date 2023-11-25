@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import ServiceKhuyenMai from '@/service/ServiceKhuyenMai';
 import ServiceHangHoa from '@/service/ServiceHangHoa';
 import useAsync from '@/hook/useAsync';
+import ServiceDeliveryReceipt from '@/service/ServiceDeliveryReceipt';
 const { Option } = Select;
 
 const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
@@ -20,15 +21,15 @@ const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
         console.log('MaHH', MaHH)
         if (MaHH != "") {
             (async () => {
-                const res = await ServiceKhuyenMai.getALKhuyenMaiCTDetail(MaHH, id)
-                const NgayApDungfm = dayjs(res[0].NgayApDung, 'YYYY-MM-DD');
-                const NgayHetHanfm = dayjs(res[0].NgayHetHan, 'YYYY-MM-DD');
+                const res = await ServiceDeliveryReceipt.getDeliveryReceiptDetails(MaHH, id)
+
                 if (res) {
                     form.setFieldsValue({
-                        MucGiam: res[0].MucGiam,
-                        NgayApDung: NgayApDungfm,
-                        NgayHetHan: NgayHetHanfm,
                         MaHH: res[0].MaHH,
+                        GiaNhap: res[0].GiaNhap,
+                        GiaBan: res[0].GiaBan,
+                        SoLuong: res[0].SoLuong,
+                        DVT: res[0].DVT,
                     });
                 }
             })();
@@ -40,39 +41,42 @@ const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
     const onFinish = async (values) => {
 
         if (MaHH != "") {
-            const ngayapdung = dayjs(values.NgayApDung).format('YYYY-MM-DD')
-            const ngayhethan = dayjs(values.NgayHetHan).format('YYYY-MM-DD')
+            const thanhTien = values.GiaNhap * values.SoLuong
 
 
             const body = {
                 "idMaHH": MaHH,
-                "MaKM": id,
-                "MucGiam": values.MucGiam,
-                "NgayApDung": ngayapdung,
-                "NgayHetHan": ngayhethan,
                 "MaHH": values.MaHH,
+                "MaPN": id,
+                "GiaNhap": values.GiaNhap,
+                "GiaBan": values.GiaBan,
+                "SoLuong": values.SoLuong,
+                "ThanhTien": thanhTien,
+                "DVT": values.DVT,
             }
-            const res = await ServiceKhuyenMai.editKhuyenMaiCT(body)
+            const res = await ServiceDeliveryReceipt.editDeliveryReceiptDetail(body)
 
             if (res.message) {
                 message.success("Sửa dữ liệu thành công và đồng bộ dữ liệu thành công!")
             }
 
         } else {
-            const ngayapdung = dayjs(values.NgayApDung).format('YYYY-MM-DD')
-            const ngayhethan = dayjs(values.NgayHetHan).format('YYYY-MM-DD')
-
+            const thanhTien = values.GiaNhap * values.SoLuong
 
             const body = {
 
-                "MaKM": id,
-                "MucGiam": values.MucGiam,
-                "NgayApDung": ngayapdung,
-                "NgayHetHan": ngayhethan,
+
                 "MaHH": values.MaHH,
+                "MaPN": id,
+                "GiaNhap": values.GiaNhap,
+                "GiaBan": values.GiaBan,
+                "SoLuong": values.SoLuong,
+                "ThanhTien": thanhTien,
+                "DVT": values.DVT,
+
             }
 
-            const res = await ServiceKhuyenMai.createKhuyenMaiCT(body)
+            const res = await ServiceDeliveryReceipt.createDeliveryReceiptDetail(body)
 
             if (res.message == "Đã tồn tại") {
                 message.warning("Mã sản phẩm đã tồn tại!")
@@ -88,7 +92,7 @@ const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
         <>
 
             <Drawer
-                title="Thêm chi tiết khuyến mãi"
+                title={MaHH != "" ? "Sửa chi tiết phiếu nhập" : "Thêm chi tiết phiếu nhập"}
                 width={720}
                 onClose={onClose}
                 open={open}
@@ -101,7 +105,7 @@ const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
             >
                 <Form layout="vertical" form={form} onFinish={onFinish} hideRequiredMark>
                     <Row gutter={16}>
-                        <Col span={12}>
+                        <Col span={24}>
                             <Form.Item
                                 name="MaHH"
                                 label="Hàng hóa"
@@ -122,54 +126,65 @@ const DrawerPhieuNhap = ({ form, open, setOpen, id, MaHH }) => {
                                 </Select>
                             </Form.Item>
                         </Col>
+
+                    </Row>
+                    <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="MucGiam"
-                                label="Mức giảm"
+                                name="GiaNhap"
+                                label="Giá nhập"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Hãy nhập mức giảm',
+                                        message: 'Hãy nhập giá nhập',
                                     },
                                 ]}
                             >
-                                <Input type='number' placeholder="Nhập mức giảm" />
+                                <Input type='number' placeholder="Nhập giá nhập" />
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item
+                                name="GiaBan"
+                                label="Giá bán"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Hãy nhập giá bán',
+                                    },
+                                ]}
+                            >
+                                <Input type='number' placeholder="Nhập giá bán" />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item
-                                name="NgayApDung"
-                                label="Ngày áp dụng"
+                                name="SoLuong"
+                                label="Số lượng"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Hãy chọn ngày áp dụng',
+                                        message: 'Hãy nhập số lượng',
                                     },
                                 ]}
                             >
-                                <DatePicker
-                                    style={{ width: "100%" }}
-                                    format="DD-MM-YYYY"
-                                    placeholder="Chọn ngày áp dụng" />
+                                <Input type='number' placeholder="Nhập số lượng" />
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item
-                                name="NgayHetHan"
-                                label="Ngày hết hạn"
+                                name="DVT"
+                                label="Đơn vị tính"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Hãy chọn ngày hết hạn',
+                                        message: 'Hãy nhập Đơn vị tính',
                                     },
                                 ]}
                             >
-                                <DatePicker
-                                    style={{ width: "100%" }}
-                                    format="DD-MM-YYYY"
-                                    placeholder="Chọn ngày hết hạn" />
+                                <Input placeholder="Nhập Đơn vị tính" />
                             </Form.Item>
                         </Col>
                     </Row>

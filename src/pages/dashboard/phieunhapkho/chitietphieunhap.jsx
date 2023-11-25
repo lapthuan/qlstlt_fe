@@ -35,13 +35,13 @@ const ChiTietPhieuNhap = () => {
     const [action, setAction] = useState("add");
     const [MaHH, setMaHH] = useState("");
 
-    const confirm = async (idDH, MaHangHoa) => {
+    const confirm = async (idMaPN, MaHangHoa) => {
         const body = {
-            "MaDH": idDH,
+            "MaPN": idMaPN,
             "MaHH": MaHangHoa
         }
-        const res = await ServiceOrder.deleteOrderDetail(body)
-        if (res.message == "Xóa chi tiết đơn hàng thành công") {
+        const res = await ServiceDeliveryReceipt.deleteDeliveryReceiptDetail(body)
+        if (res.message == "Xóa chi tiết phiếu nhập kho thành công") {
             message.success("Xóa dữ liệu thành công")
             setTimeout(() => {
                 window.location.reload()
@@ -150,7 +150,7 @@ const ChiTietPhieuNhap = () => {
                                                     <Popconfirm
                                                         title="Xóa dữ liệu"
                                                         description="Bạn chắc xóa dữ liệu này?"
-                                                        onConfirm={() => confirm(MaKM, MaHH)}
+                                                        onConfirm={() => confirm(MaPN, MaHH)}
                                                         okText="Đồng ý"
                                                         cancelText="Hủy"
                                                         okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
