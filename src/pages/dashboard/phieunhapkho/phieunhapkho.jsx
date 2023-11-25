@@ -1,13 +1,12 @@
 import { authorsTableData, projectsTableData } from "@/data";
 import useAsync from "@/hook/useAsync";
-import ServiceEmployee from "@/service/ServiceEmployee";
+import ServiceDeliveryReceipt from "@/service/ServiceDeliveryReceipt";
 import { Link } from "react-router-dom";
 import { useMaterialTailwindController } from "@/context";
 import Modal from "antd/es/modal/Modal";
 import ModalHangHoa from "@/component/modal/modalHangHoa";
 import { useState } from "react";
 import { Button, message, Popconfirm } from "antd";
-
 import {
     Card,
     CardHeader,
@@ -19,14 +18,13 @@ import {
     Progress,
 } from "@material-tailwind/react";
 import dayjs from "dayjs";
-const NhanVien = () => {
-    const { data: nhanvien } = useAsync(() => ServiceEmployee.getAllEmployee())
-    console.log(nhanvien);
-    
+const PhieuNhapKho = () => {
+    const { data: phieunhap } = useAsync(() => ServiceDeliveryReceipt.getAllDeliveryReceipt())
+    console.log(phieunhap);
         const confirm = async (id) => {
     
-            const res = await ServiceEmployee.deleteEmployee(id)
-            if (res.message == "Xóa nhân viên thành công") {
+            const res = await ServiceOrder.deleteOrder(id)
+            if (res.message == "Xóa phiếu nhập thành công") {
                 message.success("Xóa dữ liệu thành công")
                 setTimeout(() => {
                     window.location.reload()
@@ -43,14 +41,14 @@ const NhanVien = () => {
                 <CardHeader variant="gradient" color={"gray"
                 } className="mb-8 p-6">
                     <Typography variant="h6" color={"white"}>
-                        Danh sách nhân viên
+                        Danh sách phiếu nhập
                     </Typography>
                 </CardHeader>
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Mã nhân vên", "Tên nhân viên", "Giới tính", "Ngày sinh", "Địa chỉ", "SĐT", "Email", "Tên siêu thị","Hành động"].map((el) => (
+                                {["Mã phiếu nhập","Tên nhân viên", "Siêu thị","Ghi chú", "Ngày nhập","Hành động"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -66,8 +64,8 @@ const NhanVien = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {nhanvien.map(
-                                ({ MaNV,HoTen,GioiTinh,NgaySinh,DiaChi, SDT, Email,MaST}, key) => {
+                            {phieunhap.map(
+                                ({ MaDH,MaKH, MaNV, NgayDH,ThanhToan}, key) => {
                                     const className = `py-3 px-5 ${key === authorsTableData.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -77,49 +75,39 @@ const NhanVien = () => {
                                         <tr key={key + 1}>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {MaDH}
+                                                </Typography>
+                                            </td>
+                                            <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {MaKH}
+                                                </Typography>
+                                            </td>
+                                            <td className={className}>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
                                                     {MaNV}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {HoTen}
+                                                    {dayjs(NgayDH).format("DD-MM-YYYY HH:mm:ss")}
                                                 </Typography>
                                             </td>
+                                           
+                                           
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {GioiTinh}
+                                                    {ThanhToan}
                                                 </Typography>
                                             </td>
+
                                             <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {dayjs(NgaySinh).format('DD-MM-YYYY')}
-                                                 
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {DiaChi}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {SDT}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {Email}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {MaST}
-                                                </Typography>
+                                                <Link to={`../chi-tiet-don-hang/${MaDH}`}> <Button type="dashed" >Xem</Button>      </Link>
                                             </td>
                                             
                                             <td className={className}>
                                                 <div className="flex ">
-                                                    <Link to={`./${MaNV}`}>
+                                                    <Link to={`./${MaDH}`}>
                                                         <Button type="dashed">Sửa</Button>
                                                 </Link>
 
@@ -127,7 +115,7 @@ const NhanVien = () => {
                                                 <Popconfirm
                                                     title="Xóa dữ liệu"
                                                     description="Bạn chắc xóa dữ liệu này?"
-                                                    onConfirm={() => confirm(MaNV)}
+                                                    onConfirm={() => confirm(MaDH)}
                                                     okText="Đồng ý"
                                                     cancelText="Hủy"
                                                     okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
@@ -149,4 +137,4 @@ const NhanVien = () => {
     );
 }
 
-export default NhanVien;
+export default PhieuNhapKho;

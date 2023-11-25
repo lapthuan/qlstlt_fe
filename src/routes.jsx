@@ -23,7 +23,15 @@ import DanhMucChiTiet from "./pages/dashboard/danhmuc/danhmucchitiet";
 import NhanHangChiTiet from "./pages/dashboard/nhanhang/nhanhangchitiet";
 
 import NhanVien from "./pages/dashboard/nhanvien/nhanvien";
+import NhanVienChiTiet from "./pages/dashboard/nhanvien/nhanvienchitiet";
+
 import KhachHang from "./pages/dashboard/khachhang/khachhang";
+import KhachHangChiTiet from "./pages/dashboard/khachhang/khachhangchitiet";
+
+import DonHang from "./pages/dashboard/hoadon/hoadon";
+import HoaDonChiTiet from "./pages/dashboard/hoadon/hoadonchitiet";
+
+import PhieuNhapKho from "./pages/dashboard/phieunhapkho/phieunhapkho";
 import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
 import Tinh from "./pages/dashboard/tinh";
 import SieuThiChiTiet from "./pages/dashboard/sieuthi/sieuthichitiet";
@@ -75,13 +83,13 @@ export const routes = [
         icon: <DocumentIcon {...icon} />,
         name: "Đơn hàng",
         path: "/don-hang",
-        element: <SignIn />,
+        element: <DonHang />,
       },
       {
         icon: <InboxIcon {...icon} />,
         name: "Phiếu nhập kho",
         path: "/phieu-nhap-kho",
-        element: <SignUp />,
+        element: <PhieuNhapKho />,
       },
       {
         icon: <UserGroupIcon {...icon} />,
@@ -95,6 +103,7 @@ export const routes = [
         path: "/khach-hang",
         element: <KhachHang />,
       },
+    
       {
         icon: <BuildingStorefrontIcon {...icon} />,
         name: "Chi nhánh",
@@ -135,6 +144,18 @@ export const routes = [
       {
         path: "/khuyen-mai/:id",
         element: <KhuyenMaiChiTiet />,
+      },
+      {
+        path: "/nhan-vien/:id",
+        element: <NhanVienChiTiet />,
+      },
+      {
+        path: "/khach-hang/:id",
+        element: <KhachHangChiTiet />,
+      },
+      {
+        path: "/don-hang/:id",
+        element: <HoaDonChiTiet />,
       },
       {
         path: "/sieu-thi/:id",
