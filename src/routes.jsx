@@ -134,7 +134,12 @@ export const routes = [
         path: "/khuyen-mai/:id",
         element: <KhuyenMaiChiTiet />,
       },
-
+      {
+        icon: <HomeIcon {...icon} />,
+        name: "Trang chủ",
+        path: "/",
+        element: <Home />,
+      },
     ],
   },
 
