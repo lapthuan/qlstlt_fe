@@ -6,7 +6,6 @@ export * from "@/pages/dashboard/hanghoa/hanghoa";
 export * from "@/pages/dashboard/hanghoa/hanghoachitiet";
 export * from "@/pages/dashboard/danhmuc/danhmuc";
 export * from "@/pages/dashboard/danhmuc/danhmucchitiet";
-export * from "@/pages/dashboard/khuyenmai/khuyenmai";
 export * from "@/pages/dashboard/khuyenmai/khuyenmais";
 export * from "@/pages/dashboard/khuyenmai/khuyenmaichitiet";
 export * from "@/pages/dashboard/nhanhang/nhanhang";
