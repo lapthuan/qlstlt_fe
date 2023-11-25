@@ -1,6 +1,4 @@
 
-
-
 import {
     Card,
     CardHeader,
@@ -12,36 +10,46 @@ import {
 
 import { authorsTableData } from "@/data";
 import useAsync from "@/hook/useAsync";
-import ServiceBranch from "@/service/ServiceBranch";
+import ServiceHangHoa from "@/service/ServiceHangHoa";
+import { Link } from "react-router-dom";
+import { Button, message, Popconfirm } from "antd";
+import ServiceSieuThi from "@/service/ServiceSieuThi";
+import ServiceKhuyenMai from "@/service/ServiceKhuyenMai";
 
 
 
+export function KhuyenMais() {
+    const { data: khuyenMai } = useAsync(() => ServiceKhuyenMai.getAllKhuyenMai())
 
 
-
-const ChiNhanh = () => {
-    const { data: chiNhanh } = useAsync(() => ServiceBranch.getAllBranch())
-
-
-
+    const confirm = async (id) => {
+        const res = await ServiceKhuyenMai.deleteKhuyenMai(id)
+        if (res.message == "Xóa khuyến mãi thành công") {
+            message.success("Xóa dữ liệu thành công")
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
+        }
+        else
+            message.error("Lỗi xóa dữ liệu, Dữ liệu này đang tồn tại ở bảng khác")
+    }
 
     return (
 
         <div className="mt-32 mb-8 flex flex-col gap-12">
-
-
+            <Link to={"./add"}> <Button >Thêm dữ liệu</Button></Link>
             <Card>
                 <CardHeader variant="gradient" color={"gray"
                 } className="mb-8 p-6">
                     <Typography variant="h6" color={"white"}>
-                        Danh sách chi nhánh
+                        Danh sách khuyến mãi
                     </Typography>
                 </CardHeader>
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Mã chi nhánh", "Tên chi nhánh", "Địa chỉ", "Tên tỉnh"].map((el) => (
+                                {["Mã khuyến mãi", "Tên ", "Nội dung", "Chi Tiết", ""].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -57,8 +65,8 @@ const ChiNhanh = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {chiNhanh.map(
-                                ({ MaCN, TenCN, DiaChi, TenTinh }, key) => {
+                            {khuyenMai.map(
+                                ({ MaKM, Ten, NoiDung }, key) => {
                                     const className = `py-3 px-5 ${key === authorsTableData.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -68,26 +76,42 @@ const ChiNhanh = () => {
                                         <tr key={key + 1}>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {MaCN}
+                                                    {MaKM}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {TenCN}
+                                                    {Ten}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {DiaChi}
+                                                    {NoiDung}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {TenTinh}
-                                                </Typography>
+                                                <Link to={`../chi-tiet-khuyen-mai/${MaKM}`}> <Button type="dashed" >Xem</Button>      </Link>
                                             </td>
+                                            <td className={className}>
+                                                <div className="flex ">
+                                                    <Link to={`./${MaKM}`}>
+                                                        <Button type="dashed">Sửa</Button>
+                                                    </Link>
 
 
+                                                    <Popconfirm
+                                                        title="Xóa dữ liệu"
+                                                        description="Bạn chắc xóa dữ liệu này?"
+                                                        onConfirm={() => confirm(MaKM)}
+                                                        okText="Đồng ý"
+                                                        cancelText="Hủy"
+                                                        okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
+                                                    >
+                                                        <Button danger>Xóa</Button>
+                                                    </Popconfirm>
+                                                </div>
+
+                                            </td>
                                         </tr>
                                     );
                                 }
@@ -100,5 +124,3 @@ const ChiNhanh = () => {
 
     );
 }
-
-export default ChiNhanh;

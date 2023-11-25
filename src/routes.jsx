@@ -14,14 +14,14 @@ import {
   MapIcon,
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/solid";
-import { Home, Profile, Tables, Notifications, HangHoa, HangHoaChiTiet } from "@/pages/dashboard";
+import { Home, Profile, Tables, Notifications, HangHoa, HangHoaChiTiet, KhuyenMais, KhuyenMaiChiTiet } from "@/pages/dashboard";
 import { SignIn, SignUp } from "@/pages/auth";
 import DanhMuc from "./pages/dashboard/danhmuc/danhmuc";
 import NhanHang from "./pages/dashboard/nhanhang/nhanhang";
-import KhuyenMai from "./pages/dashboard/khuyenmai/khuyenmai";
+
 import DanhMucChiTiet from "./pages/dashboard/danhmuc/danhmucchitiet";
 import NhanHangChiTiet from "./pages/dashboard/nhanhang/nhanhangchitiet";
-import KhuyenMaiChiTiet from "./pages/dashboard/khuyenmai/khuyenmaichitiet";
+
 import NhanVien from "./pages/dashboard/nhanvien/nhanvien";
 import KhachHang from "./pages/dashboard/khachhang/khachhang";
 import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
@@ -69,7 +69,7 @@ export const routes = [
         icon: <TicketIcon {...icon} />,
         name: "Khuyến mãi",
         path: "/khuyen-mai",
-        element: <KhuyenMai />,
+        element: <KhuyenMais />,
       },
       {
         icon: <DocumentIcon {...icon} />,
