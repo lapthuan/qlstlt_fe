@@ -26,6 +26,8 @@ import NhanVien from "./pages/dashboard/nhanvien/nhanvien";
 import KhachHang from "./pages/dashboard/khachhang/khachhang";
 import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
 import Tinh from "./pages/dashboard/tinh";
+import SieuThiChiTiet from "./pages/dashboard/sieuthi/sieuthichitiet";
+import ChiNhanh from "./pages/dashboard/chinhanh";
 
 
 const icon = {
@@ -69,13 +71,6 @@ export const routes = [
         path: "/khuyen-mai",
         element: <KhuyenMai />,
       },
-
-    ],
-  },
-  {
-    title: "Quản lí",
-    layout: "dashboard",
-    pages: [
       {
         icon: <DocumentIcon {...icon} />,
         name: "Đơn hàng",
@@ -102,6 +97,12 @@ export const routes = [
       },
       {
         icon: <BuildingStorefrontIcon {...icon} />,
+        name: "Chi nhánh",
+        path: "/chi-nhanh",
+        element: <ChiNhanh />,
+      },
+      {
+        icon: <BuildingStorefrontIcon {...icon} />,
         name: "Siêu thị",
         path: "/sieu-thi",
         element: <SieuThi />,
@@ -114,6 +115,7 @@ export const routes = [
       }
     ],
   },
+
   {
     layout: "dashboard",
     pages: [
@@ -133,6 +135,10 @@ export const routes = [
       {
         path: "/khuyen-mai/:id",
         element: <KhuyenMaiChiTiet />,
+      },
+      {
+        path: "/sieu-thi/:id",
+        element: <SieuThiChiTiet />,
       },
       {
         icon: <HomeIcon {...icon} />,

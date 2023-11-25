@@ -1,4 +1,6 @@
 
+
+
 import {
     Card,
     CardHeader,
@@ -14,31 +16,24 @@ import ServiceHangHoa from "@/service/ServiceHangHoa";
 import { Link } from "react-router-dom";
 import { Button, message, Popconfirm } from "antd";
 import ServiceSieuThi from "@/service/ServiceSieuThi";
+import ServiceBranch from "@/service/ServiceBranch";
 
 
 
-const SieuThi = () => {
-    const { data: sieuThi } = useAsync(() => ServiceSieuThi.getAllSieuThi())
 
 
-    const confirm = async (id) => {
+
+const ChiNhanh = () => {
+    const { data: chiNhanh } = useAsync(() => ServiceBranch.getAllBranch())
 
 
-        const res = await ServiceSieuThi.deleteSieuThi(id)
-        if (res.message == "Xóa siêu thị thành công") {
-            message.success("Xóa dữ liệu thành công")
-            setTimeout(() => {
-                window.location.reload()
-            }, 3000);
-        }
-        else
-            message.error("Lỗi xóa dữ liệu, Dữ liệu này đang tồn tại ở bảng khác")
-    }
+
 
     return (
 
         <div className="mt-32 mb-8 flex flex-col gap-12">
-            <Link to={"./add"}> <Button >Thêm dữ liệu</Button></Link>
+
+
             <Card>
                 <CardHeader variant="gradient" color={"gray"
                 } className="mb-8 p-6">
@@ -50,7 +45,7 @@ const SieuThi = () => {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Mã siêu thị", "Tên siêu thị", "Địa chỉ", "Số điện thoại", "Email", "Mã chi nhánh", ""].map((el) => (
+                                {["Mã siêu thị", "Tên siêu thị", "Địa chỉ", "Số điện thoại", "Email", "Mã chi nhánh"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -66,8 +61,8 @@ const SieuThi = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {sieuThi.map(
-                                ({ MaST, TenST, DiaChi, SDT, Email, TenCN }, key) => {
+                            {chiNhanh.map(
+                                ({ MaCN, TenCN, DiaChi, TenTinh }, key) => {
                                     const className = `py-3 px-5 ${key === authorsTableData.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -77,7 +72,7 @@ const SieuThi = () => {
                                         <tr key={key + 1}>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {MaST}
+                                                    {MaCN}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
@@ -92,39 +87,11 @@ const SieuThi = () => {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {SDT}
+                                                    {TenTinh}
                                                 </Typography>
                                             </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {Email}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {TenCN}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <div className="flex ">
-                                                    <Link to={`./${MaST}`}>
-                                                        <Button type="dashed">Sửa</Button>
-                                                    </Link>
 
 
-                                                    <Popconfirm
-                                                        title="Xóa dữ liệu"
-                                                        description="Bạn chắc xóa dữ liệu này?"
-                                                        onConfirm={() => confirm(MaST)}
-                                                        okText="Đồng ý"
-                                                        cancelText="Hủy"
-                                                        okButtonProps={{ style: { backgroundColor: '#4096ff', } }}
-                                                    >
-                                                        <Button danger>Xóa</Button>
-                                                    </Popconfirm>
-                                                </div>
-
-                                            </td>
                                         </tr>
                                     );
                                 }
@@ -138,4 +105,4 @@ const SieuThi = () => {
     );
 }
 
-export default SieuThi;
+export default ChiNhanh;
