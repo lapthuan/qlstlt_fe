@@ -77,7 +77,7 @@ const ChiNhanh = () => {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {TenST}
+                                                    {TenCN}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
