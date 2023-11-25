@@ -11,7 +11,7 @@ const ServiceDeliveryReceipt = {
         return requests.post(`/phieunhap`, body);
     },
     editDeliveryReceipt: async (body, id) => {
-        return requests.put(`/phieunhap/${id}`, body);
+        return requests.put(`/phieunhap`, body);
     },
     deleteDeliveryReceipt: async (id) => {
         return requests.delete(`/phieunhap/${id}`);
