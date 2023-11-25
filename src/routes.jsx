@@ -28,6 +28,7 @@ import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
 import Tinh from "./pages/dashboard/tinh";
 import SieuThiChiTiet from "./pages/dashboard/sieuthi/sieuthichitiet";
 import ChiNhanh from "./pages/dashboard/chinhanh";
+import ChiTietKhuyenMai from "./pages/dashboard/khuyenmai/chitietkhuyenmai";
 
 
 const icon = {
@@ -135,6 +136,10 @@ export const routes = [
       {
         path: "/khuyen-mai/:id",
         element: <KhuyenMaiChiTiet />,
+      },
+      {
+        path: "/chi-tiet-khuyen-mai/:id",
+        element: <ChiTietKhuyenMai />,
       },
       {
         path: "/sieu-thi/:id",

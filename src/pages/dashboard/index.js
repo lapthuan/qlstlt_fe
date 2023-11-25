@@ -8,6 +8,7 @@ export * from "@/pages/dashboard/danhmuc/danhmuc";
 export * from "@/pages/dashboard/danhmuc/danhmucchitiet";
 export * from "@/pages/dashboard/khuyenmai/khuyenmais";
 export * from "@/pages/dashboard/khuyenmai/khuyenmaichitiet";
+export * from "@/pages/dashboard/khuyenmai/chitietkhuyenmai";
 export * from "@/pages/dashboard/nhanhang/nhanhang";
 export * from "@/pages/dashboard/nhanhang/nhanhangchitiet";
 export * from "@/pages/dashboard/nhanvien/nhanvien";
