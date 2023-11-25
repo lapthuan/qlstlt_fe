@@ -2,29 +2,29 @@ import { useParams } from "react-router-dom";
 import { Button, Col, Form, Input, message, Row, Select, Space,DatePicker } from "antd";
 import { useEffect, useState } from "react";
 import ServiceEmployee from "@/service/ServiceEmployee";
-import ServiceCustomer from "@/service/ServiceCustomer";
-import ServiceOrder from "@/service/ServiceOrder";
+import ServiceCuaHang from "@/service/ServiceCuaHang";
+import ServiceDeliveryReceipt from "@/service/ServiceDeliveryReceipt";
 import useAsync from "@/hook/useAsync";
 import dayjs from "dayjs";
-const HoaDonChiTiet = () => {
+const PhieuNhapChiTiet = () => {
     const { id } = useParams()
     const [form] = Form.useForm();
-    const { data: khachhang } = useAsync(() => ServiceCustomer.getAllCustomer())
+    const { data: cuahang } = useAsync(() => ServiceCuaHang.getAllCuaHang())
     const { data: nhanvien } = useAsync(() => ServiceEmployee.getAllEmployee())
     console.log(id);
     useEffect(() => {
         if (id != "add") {
             (async () => {
-                const res = await ServiceOrder.getOrder(id)
+                const res = await ServiceDeliveryReceipt.getDeliveryReceipt(id)
                 console.log(res);
                 if (res) {          
-                    const ngay = dayjs(res[0].NgayDH, 'YYYY-MM-DD');
+                    const ngay = dayjs(res[0].NgayNhap, 'YYYY-MM-DD');
                     form.setFieldsValue({
-                        MaDH: res[0].MaDH,
-                        NgayDH: ngay,
-                        ThanhToan: res[0].ThanhToan,
+                        MaPN: res[0].MaPN,
+                        NgayNhap: ngay,
+                        GhiChu: res[0].GhiChu,
                         MaNV: res[0].MaNV,                 
-                        MaKH: res[0].MaKH,  
+                        MaST: res[0].MaST,  
                     });
                 }
             })();
@@ -35,18 +35,18 @@ const HoaDonChiTiet = () => {
     const onFinish = async (values) => {
 
         if (id != "add") {
-            const ngay = dayjs(values.NgayDH).format('YYYY-MM-DD')
+            const ngay = dayjs(values.NgayNhap).format('YYYY-MM-DD')
           
             const body = {
                 
-                "MaDH": values.MaDH,
-                "NgayDH": ngay,
-                "ThanhToan": values.ThanhToan,
+                "MaPN": values.MaPN,
+                "NgayNhap": ngay,
+                "GhiChu": values.GhiChu,
                 "MaNV": values.MaNV,
-                "MaKH": values.MaKH,
+                "MaST": values.MaST,
             }
 
-            const res = await ServiceOrder.editOrder(body)
+            const res = await ServiceDeliveryReceipt.editDeliveryReceipt(body)
 
             if (res.message) {
                 message.success("Sửa dữ liệu thành công và đồng bộ dữ liệu thành công!")
@@ -55,22 +55,22 @@ const HoaDonChiTiet = () => {
 
         } else {
            
-            const ngay = dayjs(values.NgayDH).format('YYYY-MM-DD')
+            const ngay = dayjs(values.NgayNhap).format('YYYY-MM-DD')
           
             const body = {
                 
-                "MaDH": values.MaDH,
-                "NgayDH": ngay,
-                "ThanhToan": values.ThanhToan,
+                "MaPN": values.MaPN,
+                "NgayNhap": ngay,
+                "GhiChu": values.GhiChu,
                 "MaNV": values.MaNV,
-                "MaKH": values.MaKH,
+                "MaST": values.MaST,
             }
 
-            const res = await ServiceOrder.createOrder(body)
+            const res = await ServiceDeliveryReceipt.createDeliveryReceipt(body)
 
             if (res.message == "Đã tồn tại") {
-                message.warning("Mã đơn hàng đã tồn tại!")
-            } else if (res.message == "Thêm đơn hàng mới thành công") {
+                message.warning("Mã phiếu nhập đã tồn tại!")
+            } else if (res.message == "Thêm phiếu nhập mới thành công") {
                 message.success("Thêm dữ liệu thành công và đồng bộ dữ liệu thành công!")
 
             }
@@ -82,41 +82,20 @@ const HoaDonChiTiet = () => {
             <Row gutter={16}>
                 <Col span={8}>
                     <Form.Item
-                        name="MaDH"
-                        label="Mã đơn"
-                        
+                        name="MaPN"
+                        label="Mã phiếu"
+
                         rules={[
                             {
                                 required: true,
-                                message: 'Hãy nhập mã đơn',
+                                message: 'Hãy nhập mã phiếu nhập',
                             },
                         ]}
                     >
-                        <Input disabled={id != "add" ? true : false} placeholder="Nhập mã đơn" />
+                        <Input disabled={id != "add" ? true : false} placeholder="Nhập mã phiếu nhập" />
                     </Form.Item>
                 </Col>
-                <Col span={8}>
-                    <Form.Item
-                        name="MaKH"
-                        label="Khách hàng"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Hãy chọn khách hàng',
-                            },
-                        ]}
-                    >
-                        <Select placeholder="Chọn khách hàng">
-                            {
-                                Array.isArray(khachhang) &&
-                                khachhang.map((item, i) => (
-                                    <Option key={i + 1} value={item.MaKH}>{item.TenKH}</Option>
-                                ))}
-
-
-                        </Select>
-                    </Form.Item>
-                </Col>               
+              
                  <Col span={8}>
                     <Form.Item
                         name="MaNV"
@@ -139,38 +118,60 @@ const HoaDonChiTiet = () => {
                         </Select>
                     </Form.Item>
                 </Col>
+                <Col span={8}>
+                    <Form.Item
+                        name="MaST"
+                        label="Siêu thị"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Hãy chọn siêu thị',
+                            },
+                        ]}
+                    >
+                        <Select placeholder="Chọn siêu thị">
+                            {
+                                Array.isArray(cuahang) &&
+                                cuahang.map((item, i) => (
+                                    <Option key={i + 1} value={item.MaST}>{item.TenST}</Option>
+                                ))}
+
+
+                        </Select>
+                    </Form.Item>
+                </Col> 
             </Row>
 
             <Row gutter={16}>
             <Col span={12}>
                         <Form.Item
-                            name="NgayDH"
-                            label="Ngày mua"
+                            name="NgayNhap"
+                            label="Ngày nhập hàng"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Hãy chọn ngày mua',
+                                    message: 'Hãy chọn ngày nhập hàng',
                                 },
                             ]}
                         >
                             <DatePicker
                                 style={{ width: "100%" }}
                                 format="DD-MM-YYYY"
-                                placeholder="Chọn ngày mua" />
+                                placeholder="Chọn ngày nhập hàng" />
                         </Form.Item>
                     </Col>
                 <Col span={12}>
                 <Form.Item
-                        name="ThanhToan"
-                        label="Hình thức thanh toán"
+                        name="GhiChu"
+                        label="Ghi chú"
                         rules={[
                             {
                                 required: true,
-                                message: 'Hãy nhập hình thức thanh toán',
+                                message: 'Hãy nhập ghi chú',
                             },
                         ]}
                     >
-                        <Input placeholder="Nhập hình thức thanh toán" />
+                        <Input placeholder="Nhập ghi chú" />
                     </Form.Item>
                 </Col>
                 
@@ -191,4 +192,4 @@ const HoaDonChiTiet = () => {
     );
 }
 
-export default HoaDonChiTiet;
+export default PhieuNhapChiTiet;

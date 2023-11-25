@@ -23,7 +23,7 @@ const PhieuNhapKho = () => {
     console.log(phieunhap);
         const confirm = async (id) => {
     
-            const res = await ServiceOrder.deleteOrder(id)
+            const res = await ServiceDeliveryReceipt.deleteDeliveryReceipt(id)
             if (res.message == "Xóa phiếu nhập thành công") {
                 message.success("Xóa dữ liệu thành công")
                 setTimeout(() => {
@@ -48,7 +48,7 @@ const PhieuNhapKho = () => {
                     <table className="w-full min-w-[640px] table-auto">
                         <thead>
                             <tr>
-                                {["Mã phiếu nhập","Tên nhân viên", "Siêu thị","Ghi chú", "Ngày nhập","Hành động"].map((el) => (
+                                {["Mã phiếu nhập","Tên nhân viên", "Siêu thị","Ghi chú", "Ngày nhập","Chi tiết","Hành động"].map((el) => (
                                     <th
                                         key={el}
                                         className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -65,7 +65,7 @@ const PhieuNhapKho = () => {
                         </thead>
                         <tbody>
                             {phieunhap.map(
-                                ({ MaDH,MaKH, MaNV, NgayDH,ThanhToan}, key) => {
+                                ({ MaPN,MaNV, MaST, GhiChu,NgayNhap}, key) => {
                                     const className = `py-3 px-5 ${key === authorsTableData.length - 1
                                         ? ""
                                         : "border-b border-blue-gray-50"
@@ -75,12 +75,7 @@ const PhieuNhapKho = () => {
                                         <tr key={key + 1}>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {MaDH}
-                                                </Typography>
-                                            </td>
-                                            <td className={className}>
-                                                <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {MaKH}
+                                                    {MaPN}
                                                 </Typography>
                                             </td>
                                             <td className={className}>
@@ -90,24 +85,28 @@ const PhieuNhapKho = () => {
                                             </td>
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {dayjs(NgayDH).format("DD-MM-YYYY HH:mm:ss")}
+                                                    {MaST}
                                                 </Typography>
                                             </td>
-                                           
-                                           
                                             <td className={className}>
                                                 <Typography className="text-xs font-semibold text-blue-gray-600">
-                                                    {ThanhToan}
+                                                    {GhiChu}
                                                 </Typography>
                                             </td>
 
                                             <td className={className}>
-                                                <Link to={`../chi-tiet-don-hang/${MaDH}`}> <Button type="dashed" >Xem</Button>      </Link>
+                                                <Typography className="text-xs font-semibold text-blue-gray-600">
+                                                    {dayjs(NgayNhap).format("DD-MM-YYYY HH:mm:ss")}
+                                                </Typography>
+                                            </td>
+                                                               
+                                            <td className={className}>
+                                                <Link to={`../chi-tiet-don-hang/${MaPN}`}> <Button type="dashed" >Xem</Button>      </Link>
                                             </td>
                                             
                                             <td className={className}>
                                                 <div className="flex ">
-                                                    <Link to={`./${MaDH}`}>
+                                                    <Link to={`./${MaPN}`}>
                                                         <Button type="dashed">Sửa</Button>
                                                 </Link>
 
@@ -115,7 +114,7 @@ const PhieuNhapKho = () => {
                                                 <Popconfirm
                                                     title="Xóa dữ liệu"
                                                     description="Bạn chắc xóa dữ liệu này?"
-                                                    onConfirm={() => confirm(MaDH)}
+                                                    onConfirm={() => confirm(MaPN)}
                                                     okText="Đồng ý"
                                                     cancelText="Hủy"
                                                     okButtonProps={{ style: { backgroundColor: '#4096ff', } }}

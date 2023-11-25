@@ -32,6 +32,8 @@ import DonHang from "./pages/dashboard/hoadon/hoadon";
 import HoaDonChiTiet from "./pages/dashboard/hoadon/hoadonchitiet";
 
 import PhieuNhapKho from "./pages/dashboard/phieunhapkho/phieunhapkho";
+import PhieuNhapChiTiet from "./pages/dashboard/phieunhapkho/phieunhapchitiet";
+
 import SieuThi from "./pages/dashboard/sieuthi/sieuthi";
 import Tinh from "./pages/dashboard/tinh";
 import SieuThiChiTiet from "./pages/dashboard/sieuthi/sieuthichitiet";
@@ -161,6 +163,10 @@ export const routes = [
       {
         path: "/don-hang/:id",
         element: <HoaDonChiTiet />,
+      },
+      {
+        path: "/phieu-nhap-kho/:id",
+        element: <PhieuNhapChiTiet />,
       },
       {
         path: "/sieu-thi/:id",
