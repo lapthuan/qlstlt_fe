@@ -19,6 +19,9 @@ import { SignIn, SignUp } from "@/pages/auth";
 import DanhMuc from "./pages/dashboard/danhmuc/danhmuc";
 import NhanHang from "./pages/dashboard/nhanhang/nhanhang";
 import KhuyenMai from "./pages/dashboard/khuyenmai/khuyenmai";
+import DanhMucChiTiet from "./pages/dashboard/danhmuc/danhmucchitiet";
+import NhanHangChiTiet from "./pages/dashboard/nhanhang/nhanhangchitiet";
+import KhuyenMaiChiTiet from "./pages/dashboard/khuyenmai/khuyenmaichitiet";
 
 
 const icon = {
@@ -115,7 +118,18 @@ export const routes = [
         path: "/hang-hoa/:id",
         element: <HangHoaChiTiet />,
       },
-
+      {
+        path: "/danh-muc/:id",
+        element: <DanhMucChiTiet />,
+      },
+      {
+        path: "/nhan-hang/:id",
+        element: <NhanHangChiTiet />,
+      },
+      {
+        path: "/khuyen-mai/:id",
+        element: <KhuyenMaiChiTiet />,
+      },
 
     ],
   },

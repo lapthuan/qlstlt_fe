@@ -10,4 +10,11 @@ export * from "@/pages/dashboard/khuyenmai/khuyenmai";
 export * from "@/pages/dashboard/khuyenmai/khuyenmaichitiet";
 export * from "@/pages/dashboard/nhanhang/nhanhang";
 export * from "@/pages/dashboard/nhanhang/nhanhangchitiet";
+export * from "@/pages/dashboard/nhanvien/nhanvien";
+export * from "@/pages/dashboard/nhanvien/nhanvienchitiet";
+export * from "@/pages/dashboard/khachhang/khachhang";
+export * from "@/pages/dashboard/khachhang/khachhang";
+export * from "@/pages/dashboard/sieuthi";
+export * from "@/pages/dashboard/tinh";
+
 
