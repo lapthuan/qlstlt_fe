@@ -175,7 +175,7 @@ const DrawerKhuyenMai = ({ form, open, setOpen, id, MaHH }) => {
                     </Row>
                     <Row>
                         <Space>
-                            <Button onClick={onClose}>Hủy</Button>
+                            <Button onClick={onClose} type="dashed" danger>Hủy</Button>
                             <Button htmlType='submit' type="default" >
                                 {MaHH != "" ? "Sửa" : "Thêm"}
                             </Button>
