@@ -54,7 +54,7 @@ export function KhuyenMaiChiTiet() {
 
             if (res.message == "Đã tồn tại") {
                 message.warning("Mã sản phẩm đã tồn tại!")
-            } else if (res.message == "Thêm hàng hóa mới thành công") {
+            } else if (res.message == "Thêm khuyến mãi mới thành công") {
                 message.success("Thêm khuyến mãi mới thành công")
             }
         }
