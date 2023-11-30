@@ -22,7 +22,7 @@ const TaiKhoanChiTiet = () => {
                         TenTK: res[0].TenTK,
                         MaNV: res[0].MaNV,
                         Matkhau: res[0].Matkhau,
-                        Quyen: res[0].Quyen,
+                        Quyen: res[0].Quyen === 1 ? "Admin" : "User",
                     });
                 }
             })();
@@ -100,22 +100,24 @@ const TaiKhoanChiTiet = () => {
                         </Form.Item>
                     </Col>
                 </Row>
-                <Row gutter={16}>
-                    <Col span={12}>
+                <Row gutter={16}>                  
+                    <Col span={8}>
                         <Form.Item
                             name="Quyen"
-                            label="Nhập quyền tài khoản"
-
+                            label="Quyền"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Hãy quyền tài khoản',
+                                    message: 'Hãy chọn quyền',
                                 },
                             ]}
                         >
-                            <Input placeholder="Nhập quyền tài khoản" />
+                            <Select placeholder="Chọn quyền">
+                                <Option value="1">Admin</Option>
+                                <Option value="0">User</Option>
+                            </Select>
                         </Form.Item>
-                    </Col>
+                        </Col>
                     <Col span={12}>
                         <Form.Item
                             name="MaNV"
