@@ -41,6 +41,8 @@ import ChiNhanh from "./pages/dashboard/chinhanh";
 import ChiTietKhuyenMai from "./pages/dashboard/khuyenmai/chitietkhuyenmai";
 import ChiTietHoaDon from "./pages/dashboard/hoadon/chitiethoadon";
 import ChiTietPhieuNhap from "./pages/dashboard/phieunhapkho/chitietphieunhap";
+import Account from './pages/dashboard/taikhoan/taikhoan';
+import TaiKhoanChiTiet from './pages/dashboard/taikhoan/taikhoanchitiet';
 
 
 const icon = {
@@ -101,6 +103,12 @@ export const routes = [
         name: "Nhân viên",
         path: "/nhan-vien",
         element: <NhanVien />,
+      },
+      {
+        icon: <UserGroupIcon {...icon} />,
+        name: "Tài khoản",
+        path: "/tai-khoan",
+        element: <Account />,
       },
       {
         icon: <UsersIcon {...icon} />,
@@ -181,6 +189,10 @@ export const routes = [
       {
         path: "/chi-tiet-phieu-nhap/:id",
         element: <ChiTietPhieuNhap />,
+      },
+      {
+        path: "/tai-khoan/:id",
+        element: <TaiKhoanChiTiet />,
       },
       {
         icon: <HomeIcon {...icon} />,
