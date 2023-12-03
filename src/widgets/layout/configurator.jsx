@@ -14,6 +14,8 @@ import {
   setSidenavType,
   setFixedNavbar,
 } from "@/context";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 function formatNumber(number, decPlaces) {
   decPlaces = Math.pow(10, decPlaces);
@@ -45,7 +47,7 @@ export function Configurator() {
   const { openConfigurator, sidenavColor, sidenavType, fixedNavbar } =
     controller;
   const [stars, setStars] = React.useState(0);
-
+ 
   const sidenavColors = {
     white: "from-gray-100 to-gray-100 border-gray-200",
     dark: "from-black to-black border-gray-200",
@@ -141,9 +143,9 @@ export function Configurator() {
             />
           </div>
           <hr />
-        
+         
         </div>
-      
+
       </div>
     </aside>
   );

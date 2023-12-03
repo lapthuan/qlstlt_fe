@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import {
   Navbar,
   Typography,
@@ -25,30 +25,35 @@ import {
   setOpenConfigurator,
   setOpenSidenav,
 } from "@/context";
+import { message } from "antd";
 
 export function DashboardNavbar() {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
-
+  const User = JSON.parse(localStorage.getItem('user'));
+  const navigate = useNavigate();
+  const logout = () => {
+    message.success("Đăng xuất thành công")
+    localStorage.removeItem("user")
+    navigate("/dangnhap")
+  };
   return (
     <Navbar
       color={fixedNavbar ? "white" : "transparent"}
-      className={`rounded-xl transition-all ${
-        fixedNavbar
-          ? "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
-          : "px-0 py-1"
-      }`}
+      className={`rounded-xl transition-all ${fixedNavbar
+        ? "sticky top-4 z-40 py-3 shadow-md shadow-blue-gray-500/5"
+        : "px-0 py-1"
+        }`}
       fullWidth
       blurred={fixedNavbar}
     >
       <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
         <div className="capitalize">
           <Breadcrumbs
-            className={`bg-transparent p-0 transition-all ${
-              fixedNavbar ? "mt-1" : ""
-            }`}
+            className={`bg-transparent p-0 transition-all ${fixedNavbar ? "mt-1" : ""
+              }`}
           >
             <Link to={`/${layout}`}>
               <Typography
@@ -72,8 +77,8 @@ export function DashboardNavbar() {
           </Typography>
         </div>
         <div className="flex items-center">
-         
-        
+          <p className="text-black mx-2">   {(User?.Quyen == 0 ? "Nhân viên - " : "Admin - ") + User?.HoTen}</p>
+          <Button className="mx-2" onClick={logout} >Đăng xuất</Button>
           <IconButton
             variant="text"
             color="blue-gray"

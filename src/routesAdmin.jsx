@@ -49,7 +49,7 @@ const icon = {
   className: "w-5 h-5 text-inherit",
 };
 
-export const routes = [
+export const routesAdmin = [
   {
     layout: "dashboard",
     pages: [
@@ -98,13 +98,43 @@ export const routes = [
         path: "/phieu-nhap-kho",
         element: <PhieuNhapKho />,
       },
-    
+      {
+        icon: <UserGroupIcon {...icon} />,
+        name: "Nhân viên",
+        path: "/nhan-vien",
+        element: <NhanVien />,
+      },
+      {
+        icon: <UserGroupIcon {...icon} />,
+        name: "Tài khoản",
+        path: "/tai-khoan",
+        element: <Account />,
+      },
       {
         icon: <UsersIcon {...icon} />,
         name: "Khách hàng",
         path: "/khach-hang",
         element: <KhachHang />,
       },
+
+      {
+        icon: <BuildingStorefrontIcon {...icon} />,
+        name: "Chi nhánh",
+        path: "/chi-nhanh",
+        element: <ChiNhanh />,
+      },
+      {
+        icon: <BuildingStorefrontIcon {...icon} />,
+        name: "Siêu thị",
+        path: "/sieu-thi",
+        element: <SieuThi />,
+      },
+      {
+        icon: <MapIcon {...icon} />,
+        name: "Tỉnh",
+        path: "/tinh",
+        element: <Tinh />,
+      }
     ],
   },
 
@@ -175,4 +205,4 @@ export const routes = [
 
 ];
 
-export default routes;
+export default routesAdmin;

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Navbar as MTNavbar,
   Collapse,
@@ -41,7 +41,7 @@ export function Navbar({ brandName, routes, action }) {
       ))}
     </ul>
   );
-
+ 
   return (
     <MTNavbar className="p-3">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
@@ -52,11 +52,13 @@ export function Navbar({ brandName, routes, action }) {
           >
             {brandName}
           </Typography>
+
         </Link>
         <div className="hidden lg:block">{navList}</div>
         {React.cloneElement(action, {
           className: "hidden lg:inline-block",
         })}
+    
         <IconButton
           variant="text"
           size="sm"
